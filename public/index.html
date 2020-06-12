@@ -1,17 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="white" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Magic 8 Ball" />
+    <meta name="msapplication-TileImage" content="favicon_io/android-chrome-192x192.png" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+
+</head>
+
 <body>
     <form id="magic8ball">
         <h1>Magic 8 ball</h1>
         <p>Ask me anything I will answer.</p>
-        <input id="question" placeholder="enter a question"/>
+        <input id="question" placeholder="enter a question" />
         <button type="submit">Ask</button>
         <p id="answer">If you had asked The answer would be here</p>
     </form>
+    <noscript>
+        <p>This progressive web app requires javascript to work</p>
+    </noscript>
+
     <script>
-        const aChoices = ["yes", "no", "maybe", "most definitely", "I think so"];
-        document.getElementById("magic8ball").addEventListener("submit", (evt)=>{
-            evt.preventDefault();
-            const nChoice = Math.floor(Math.random() * aChoices.length);
-            document.getElementById("answer").innerHTML = aChoices[nChoice];
-        });
+        window.onload = () => {
+            'use strict';
+
+            const aChoices = ["yes", "no", "maybe", "most definitely", "I think so"];
+            document.getElementById("magic8ball").addEventListener("submit", (evt) => {
+                evt.preventDefault();
+                const nChoice = Math.floor(Math.random() * aChoices.length);
+                document.getElementById("answer").innerHTML = aChoices[nChoice];
+            });
+
+
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('./sw.js');
+            }
+        }
+
     </script>
 </body>
+
+</html>
